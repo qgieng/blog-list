@@ -22,8 +22,4 @@ app.use(express.json())
 
 app.use(blogRouter)
 
-
-
-
-
 module.exports = app;

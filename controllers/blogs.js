@@ -20,6 +20,4 @@ blogRouter.post('/api/blogs', (request, response) => {
   })
 
 
-
-
 module.exports  = blogRouter
