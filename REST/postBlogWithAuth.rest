@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjVmNGJhYWZmNmJhYzFhNmNlY2EyODkzMCIsImlhdCI6MTU5OTgxNzI5NX0.xanQhO4qtbhY_8d0HppyvmF9ALmxMlHPDAp_sgKCg_M
+
+{
+    "title": "The Boys Season token",
+    "author": "SuperUser",
+    "url": "amazon.com/stream",
+    "likes": 2020
+}
