@@ -39,4 +39,9 @@ blogRouter.post("/api/blogs", async (request, response) => {
 })
 
 
+blogRouter.put('/:id', async (request, response)=>{
+    
+})
+
+
 module.exports  = blogRouter
