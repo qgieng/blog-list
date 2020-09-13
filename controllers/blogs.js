@@ -15,11 +15,11 @@ blogRouter.post("/api/blogs", async (request, response) => {
     const body = request.body;
 
     //const token = helper.getTokenFrom(request);
-    logger.info('request _token' ,request.token)
+   
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
     if(!(request.token  && decodedToken)){
         return response.
-            status(404).
+            status(401).
             json({
                 error: 'token missing or invalid'}
                 )
@@ -39,8 +39,33 @@ blogRouter.post("/api/blogs", async (request, response) => {
 })
 
 
-blogRouter.put('/:id', async (request, response)=>{
+blogRouter.delete('/:id', async (request, response)=>{
+    const id_delete = request.params.id;
+    //verify user token...
+    const decodedToken = jwt.verify(request.token, process.env.SECRET);
+    if(!(request.token  && decodedToken)){
+        return response.
+            status(404).
+            json({
+                error: 'token missing or invalid'}
+                )
+    }
+
+    //get user by decoding token 
+    const loggedUser =await  User.findById(decodedToken.id);
+
+    loggedUser.blogs = loggedUser.blogs.filter(blog=>{
+
+    })
     
+    //find post associated with user
+    //delete post associated from user
+    //remove post association from user
+    //save user
+    //
+
+    response.json(deletedBlog)
+
 })
 
 
