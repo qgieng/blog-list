@@ -10,6 +10,10 @@ const blogRouter = require("./controllers/blogs")
 const UserRouter = require('./controllers/users');
 const loginRouter = require('./controllers/login')
 const mongoUrl = config.MONGODB_URI
+
+
+mongoose.set('useCreateIndex', true);
+
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(message=>{
         logger.info("connected to MongoDB: ")
