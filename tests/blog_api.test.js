@@ -8,34 +8,52 @@ const bcrypt = require('bcrypt')
 
 const api = supertest(app);
 
-beforeEach(async ()=>{
-    await Blog.deleteMany({});
 
-    const BlogObj = helper.initialBlog.map(blog=> new Blog(blog));
-    const promiseArray = BlogObj.map(blog => blog.save());
-    await Promise.all(promiseArray);
+describe("bloglist validation", ()=>{
+    beforeEach(async ()=>{
+        await Blog.deleteMany({});
+        await User.deleteMany({});
+
+        const UserObject = helper.initialUser.map(user=> new User(user));
+        const userPromiseArray = UserObject.map(user => user.save());
+        await Promise.all(userPromiseArray);
+
+        const oneUser = await User.findOne({});
+
+        const token = 
+
+        const BlogObj = helper.initialBlog.map(blog=> new Blog(blog));
+        const promiseArray = BlogObj.map(blog => blog.save());
+        await Promise.all(promiseArray);
+    })
+
+    test('blog testing step1: ', async ()=>{
+        const response = await api.get('/api/blogs')
+        expect(response.body).toHaveLength(helper.initialBlog.length)
+    })
+
+
+    test('blog testing step2: unique identifier id name', async ()=>{
+        const blogs = await api.get('api/blogs')
+        
+    })
+
+
+    test('blog testing step3: unique identifier id name', async ()=>{
+        const blogs = await api.get('api/blogs')
+        
+    })
+
 })
 
-test('blog testing step1: ', async ()=>{
-    const response = await api.get('/api/blogs')
-    expect(response.body).toHaveLength(helper.initialBlog.length)
-})
-
-
-test('blog testing step2: unique identifier id name', async ()=>{
-    const blogs = await api.get('api/blogs')
-    
-})
-
-
-
-describe("bloglist user validation", ()=>{
+describe("bloglist User validation", ()=>{
 
     beforeEach(async ()=>{
         await User.deleteMany({})
     
         const passwordHash = await bcrypt.hash('sekret', 10)
         const user = new User({username: 'root', passwordHash})
+    
     
         await user.save()
     
@@ -87,6 +105,7 @@ describe("bloglist user validation", ()=>{
 
 })
 
+//npm test -- -t 'a specific note is within the returned notes'
 
 afterAll(() => {
     mongoose.connection.close()

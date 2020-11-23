@@ -1,4 +1,19 @@
 const Blog = require('../models/blog');
+const initialUser = [
+    {
+        username: 'root',
+        name: 'superuser',
+        password: 'password'
+
+    },
+    {
+        username: 'poster',
+        name: 'blogposter',
+        password: 'password2'
+
+    }
+]
+
 
 const initialBlog = [
     {title: "Test Blog1",
@@ -19,5 +34,5 @@ const blogsInDB = async ()=>{
 }
 
 module.exports = {
-    initialBlog, blogsInDB
+    initialBlog, blogsInDB, initialUser
 }

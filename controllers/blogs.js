@@ -45,7 +45,7 @@ blogRouter.delete('/api/blogs/:id', async (request, response)=>{
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
     if(!(request.token  && decodedToken)){
         return response.
-            status(404).
+            status(401).
             json({
                 error: 'token missing or invalid'}
                 )
@@ -61,7 +61,7 @@ blogRouter.delete('/api/blogs/:id', async (request, response)=>{
 
     //remove post association from user
     if(deletedBlog.user.toString() === loggedUser._id.toString()){
-        const deleteBlog = await Blog.findByIdAndDelete(request.params.id);
+        await Blog.findByIdAndDelete(request.params.id);
         loggedUser.blogs = loggedUser.blogs.filter(blog_id=>{ 
             return request.params.id.toString() !== blog_id.toString();
         })
