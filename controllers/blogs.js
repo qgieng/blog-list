@@ -41,6 +41,31 @@ blogRouter.post("/api/blogs", async (request, response) => {
 })
 
 
+blogRouter.put('/api/blogs/:id', async (request, response)=>{
+    const decodedToken = jwt.verify(request.token, process.env.SECRET);
+    if(!(request.token  && decodedToken)){
+        return response.
+            status(401).
+            json({
+                error: 'token missing or invalid'}
+                )
+    }
+    const updatedBlog = {
+        ...request.body,
+        likes: request.body.likes+1,
+    }
+
+    const likedBlog = await Blog.findByIdAndUpdate(request.params.id, updatedBlog);
+    if(!likedBlog){
+        console.log("Like request not valid")
+        return response.status(400).json({
+            error:'blog id does not exist'
+        })
+    }
+
+    return likedBlog
+})
+
 blogRouter.delete('/api/blogs/:id', async (request, response)=>{
    
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
