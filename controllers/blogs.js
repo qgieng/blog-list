@@ -36,6 +36,7 @@ blogRouter.post("/api/blogs", async (request, response) => {
 
      oneUser.blogs = oneUser.blogs.concat(savedBlog.id);
      await oneUser.save();
+     console.log(savedBlog)
      response.json(savedBlog);
 })
 

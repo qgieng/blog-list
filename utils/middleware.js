@@ -1,4 +1,5 @@
 const logger = require('./logger')
+const morgan = require('morgan');
 const blog_helper = require('./blog_helper');
 
 const tokenExtractor = (request, response, next)=>{
@@ -26,7 +27,11 @@ const errorHandler = (error, request, response, next) => {
     next(error)
   }
 
+  morgan.token('bodydata', (req , res) => {
+    return JSON.stringify(req.body);
+  });
   
+  const morgan_logger = morgan(':method :url :status :res[content-length] - :response-time ms :bodydata');
 
 
 
@@ -34,5 +39,6 @@ const errorHandler = (error, request, response, next) => {
 
   module.exports = {
     errorHandler,
-    tokenExtractor
+    tokenExtractor,
+    morgan_logger
   }
