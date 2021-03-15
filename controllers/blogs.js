@@ -63,8 +63,7 @@ blogRouter.put('/api/blogs/:id', async (request, response)=>{
         })
     }
 
-    return likedBlog
-})
+    response.json(likedBlog)
 
 blogRouter.delete('/api/blogs/:id', async (request, response)=>{
    
