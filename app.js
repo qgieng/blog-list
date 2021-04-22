@@ -29,10 +29,8 @@ app.use(middleware.morgan_logger);
 app.use(middleware.tokenExtractor);
 
 app.use('/api/login', loginRouter)
-
 app.use(blogRouter)
 app.use('/api/users', UserRouter)
-
 
 app.use(middleware.errorHandler)
 

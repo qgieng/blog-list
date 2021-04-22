@@ -4,6 +4,7 @@ const blog_helper = require('./blog_helper');
 
 const tokenExtractor = (request, response, next)=>{
     request.token =  blog_helper.getTokenFrom(request)
+    //passes on the request to the next middleware function in the stack by calling the next() function after parsing out the token.
     next();
 }
 

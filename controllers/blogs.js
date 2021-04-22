@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const helper = require('../utils/blog_helper.js');
 const logger = require("../utils/logger");
 const { info } = require("../utils/logger");
-
+//finds all blogs and returns it in the response.
 blogRouter.get("/api/blogs", async (request, response) => {
     const blogs = await Blog.find({}).populate('user', {username:1, name:1, id:1})
     response.json(blogs);
@@ -40,9 +40,12 @@ blogRouter.post("/api/blogs", async (request, response) => {
      response.json(savedBlog);
 })
 
-
+//part5_b props.children and proptyuypes.
+//Like blogs
+//id represents id of blog.
 blogRouter.put('/api/blogs/:id', async (request, response)=>{
     const decodedToken = jwt.verify(request.token, process.env.SECRET);
+
     if(!(request.token  && decodedToken)){
         return response.
             status(401).
@@ -64,6 +67,7 @@ blogRouter.put('/api/blogs/:id', async (request, response)=>{
     }
 
     response.json(likedBlog)
+})
 
 blogRouter.delete('/api/blogs/:id', async (request, response)=>{
    
